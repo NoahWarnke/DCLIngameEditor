@@ -42,9 +42,6 @@ export class InSceneEditor {
       typeButton.setParent(root);
       let shape = new BoxShape();
       /*
-      let shape = new PlaneShape();
-      shape.width = 0.15;
-      shape.height = 0.15;
       shape.uvs = [
         0.5, 0.125,
         0.625, 0.125,
@@ -61,9 +58,11 @@ export class InSceneEditor {
         position: new Vector3(i * 0.2 - 1.1, i === 0 ? 0.025 : 0.05, 0.6),
         scale: new Vector3(0.15, 0.1, 0.15)
       }));
+      /*
       let mat = new Material();
       mat.albedoTexture = buttonsTexture;
       typeButton.addComponent(mat);
+      */
       typeButton.addComponent(new OnClick(() => {
         this.editTypeButtons[this.editing].getComponent(Transform).position.y = 0.05;
         this.changeEditType(this.editTypes[i]);
@@ -242,7 +241,7 @@ export class InSceneEditor {
       case "rot": {
         let field = this.target.getComponent(Transform).rotation;
         let cur = field.eulerAngles;
-        newValues = new Vector3(field.eulerAngles.x * mx + bx * 10, field.eulerAngles.y * my + by * 10, field.eulerAngles.z * mz + bz * 10);
+        newValues = new Vector3(field.eulerAngles.x * mx + bx, field.eulerAngles.y * my + by, field.eulerAngles.z * mz + bz);
         field.setEuler(newValues.x, newValues.y, newValues.z);
         break;
       }
